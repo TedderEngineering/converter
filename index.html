@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VBOX to MoTeC Converter — Tedder Engineering</title>
+<meta name="description" content="Convert Racelogic VBOX data to MoTeC i2 Pro format. Built for GR86 Cup teams. Auto track detection, lap merging, batch conversion of full race weekends.">
+<meta property="og:title" content="VBOX to MoTeC Converter">
+<meta property="og:description" content="Built for GR86 Cup teams. Drop your VBOX data, get organized MoTeC files back.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://converter.tedderengineering.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="logo-group">
+      <a href="https://tedderengineering.com" target="_blank" rel="noopener noreferrer" class="logo-link" aria-label="Tedder Engineering">
+        <img src="tedder-logo.png" alt="Tedder Engineering" class="logo-img" width="952" height="364">
+      </a>
+      <a href="#" class="logo-wordmark">Converter</a>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <nav class="site-nav" id="nav-links">
+      <a href="https://tedderengineering.com">Home</a>
+      <a href="https://tedderengineering.com#racetrace">RaceTrace</a>
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#waitlist" class="btn btn-sm">Join Waitlist</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-text">
+        <div class="eyebrow-pill">
+          <span class="eyebrow-dot" aria-hidden="true"></span>
+          <span class="eyebrow-text">VBOX &rarr; MoTeC conversion</span>
+        </div>
+        <h1>From VBOX.<br><span class="gradient-text">To MoTeC.</span><br>In seconds.</h1>
+        <p class="lede">
+          Drop your Racelogic VBOX files in. Get back organized MoTeC i2 Pro
+          data &mdash; lap timing populated, 73 channels mapped, full race weekend
+          ready to analyze.
+        </p>
+        <p class="sublede">
+          Built specifically for Toyota GR86 Cup teams. No Python, no
+          scripts, no fighting with file formats.
+        </p>
+        <div class="hero-ctas">
+          <a href="#waitlist" class="btn btn-primary">Join the Waitlist</a>
+          <a href="#features" class="btn btn-ghost">See How It Works</a>
+        </div>
+        <p class="hero-note">Early access pricing for waitlist members. Launch coming soon.</p>
+      </div>
+      <div class="hero-visual fade-in">
+        <div class="hero-halo" aria-hidden="true"></div>
+        <div class="screenshot-frame">
+          <div class="screenshot-chrome" aria-hidden="true">
+            <span class="chrome-dot chrome-dot-close"></span>
+            <span class="chrome-dot chrome-dot-min"></span>
+            <span class="chrome-dot chrome-dot-max"></span>
+          </div>
+          <picture>
+            <source srcset="hero-i2pro-cota.webp" type="image/webp">
+            <img src="hero-i2pro-cota.jpg"
+                 alt="MoTeC i2 Pro showing a converted GR86 Cup session at Circuit of the Americas: four laps split correctly, channels named, sectors labeled, track map auto-detected."
+                 class="screenshot"
+                 width="2400"
+                 height="1435"
+                 loading="eager">
+          </picture>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM / SOLUTION -->
+<section class="section problem-section" id="problem">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="eyebrow">The Old Way</span>
+      <h2>Race weekend ends. Then the work begins.</h2>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-card fade-in">
+        <div class="problem-icon">&#9888;</div>
+        <h3>Files scattered across the SD card</h3>
+        <p>VBOX HD2 splits a session across multiple files. Manually merging them is error-prone and tedious.</p>
+      </div>
+      <div class="problem-card fade-in">
+        <div class="problem-icon">&#9888;</div>
+        <h3>No lap detection in i2</h3>
+        <p>Open a converted file in MoTeC and the whole session is one giant lap. No splits, no comparisons, no analysis.</p>
+      </div>
+      <div class="problem-card fade-in">
+        <div class="problem-icon">&#9888;</div>
+        <h3>Cryptic channel names</h3>
+        <p>"nmot," "ath," "vwheel_fl"&mdash;not exactly intuitive. You spend an hour mapping them before you can build a single worksheet.</p>
+      </div>
+      <div class="problem-card fade-in">
+        <div class="problem-icon">&#9888;</div>
+        <h3>Hours per car, every weekend</h3>
+        <p>Multiply the above by every car on the team, every session, every event. The data engineer drowns.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section features-section" id="features">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="eyebrow">The New Way</span>
+      <h2>Drop in, download, done.</h2>
+      <p class="section-lede">
+        The converter handles the parts that aren't worth your time, so
+        you can spend the morning analyzing data instead of preparing it.
+      </p>
+    </div>
+    <div class="feature-grid">
+      <div class="card feature-card fade-in">
+        <div class="feature-number">01</div>
+        <h3>Auto track detection</h3>
+        <p>GPS coordinates identify the track automatically. COTA, Sebring, Sonoma, VIR, Laguna Seca&mdash;every track on the GR Cup calendar, recognized on upload.</p>
+      </div>
+      <div class="card feature-card fade-in">
+        <div class="feature-number">02</div>
+        <h3>Lap detection that works</h3>
+        <p>Reads the start/finish line from the VBOX HD2 itself. Beacon and Lap Number channels arrive properly populated, so i2 splits laps the moment you open the file.</p>
+      </div>
+      <div class="card feature-card fade-in">
+        <div class="feature-number">03</div>
+        <h3>All 73 channels, properly named</h3>
+        <p>"Engine RPM" instead of "nmot." "Throttle Pos" instead of "ath." "Wheel Speed FL/FR/RL/RR" instead of "vwheel_*." Tuned for the Bosch DDU on the GR86.</p>
+      </div>
+      <div class="card feature-card fade-in">
+        <div class="feature-number">04</div>
+        <h3>Multi-file session merge</h3>
+        <p>Drop a folder of files from a single session and get one continuous LD back, with lap timing preserved across the joins. Pro and Team tiers.</p>
+      </div>
+      <div class="card feature-card fade-in">
+        <div class="feature-number">05</div>
+        <h3>Organized output</h3>
+        <p>Files come back named <code>Q1_42_L1-L8.ld</code>, organized into <code>GRCup_COTA_2026-04-24/</code>. Drop straight into your MoTeC workspace.</p>
+      </div>
+      <div class="card feature-card fade-in">
+        <div class="feature-number">06</div>
+        <h3>Your data isn't kept</h3>
+        <p>Files are deleted automatically after download. We never train on, share, or retain your telemetry.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEE IT IN ACTION -->
+<section class="section showcase-section" id="showcase">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="eyebrow">See It In Action</span>
+      <h2>Real data. Real teams. Real analysis.</h2>
+      <p class="section-lede">
+        Below: a two-driver overlay from the GR Cup at Circuit of the
+        Americas. Lap detection, sector splits, and full channel mapping
+        &mdash; straight out of the converter, opened in i2&nbsp;Pro.
+      </p>
+    </div>
+
+    <div class="showcase-stack">
+      <figure class="showcase-figure fade-in">
+        <div class="showcase-frame">
+          <picture>
+            <source srcset="showcase-1-overlay-cota.webp" type="image/webp">
+            <img src="showcase-1-overlay-cota.jpg"
+                 alt="MoTeC i2 Pro showing a two-car overlay across an entire COTA lap: Variance channel at top, current and reference traces with delta readouts in the channel margins, sector labels auto-detected from the track map, G-G plot, gain-loss, ABS &amp; TC activation."
+                 class="showcase-image"
+                 width="2400"
+                 height="1435"
+                 loading="lazy">
+          </picture>
+        </div>
+        <figcaption>
+          <strong>Driver Summary.</strong>
+          Two-car overlay across an entire lap. Sector breakdown
+          (Turn&nbsp;5, Str&nbsp;8&ndash;9, Turn&nbsp;13&hellip;) auto-detects
+          from the track map. G-G plot, gain-loss trace, ABS &amp; TC
+          activation timeline &mdash; all from properly named channels.
+        </figcaption>
+      </figure>
+
+      <figure class="showcase-figure fade-in">
+        <div class="showcase-frame">
+          <picture>
+            <source srcset="showcase-2-multifile-cota.webp" type="image/webp">
+            <img src="showcase-2-multifile-cota.jpg"
+                 alt="MoTeC i2 Pro showing 18 laps merged from multiple VBOX files into one continuous COTA session: ~100km cumulative distance, lap markers consistent across file boundaries, sectors and Beacon pulses intact, no manual re-splitting."
+                 class="showcase-image"
+                 width="2400"
+                 height="1435"
+                 loading="lazy">
+          </picture>
+        </div>
+        <figcaption>
+          <strong>Lap times preserved across multi-file sessions.</strong>
+          Red flags and SD card splits merge into one continuous
+          LD with sectors and Beacon pulses intact &mdash; no manual
+          re-splitting in i2.
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section steps-section">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="eyebrow">Workflow</span>
+      <h2>Three steps. No software to install.</h2>
+    </div>
+    <div class="steps-grid">
+      <div class="step fade-in">
+        <div class="step-num">1</div>
+        <h3>Upload your VBOX files</h3>
+        <p>Drag and drop. One file, a folder of files, or your entire weekend at once. Up to 2&nbsp;GB on Team plans.</p>
+      </div>
+      <div class="step-arrow" aria-hidden="true">&rarr;</div>
+      <div class="step fade-in">
+        <div class="step-num">2</div>
+        <h3>Conversion in seconds</h3>
+        <p>Track auto-detected, channels mapped, sessions merged, laps split. Watch progress in real time.</p>
+      </div>
+      <div class="step-arrow" aria-hidden="true">&rarr;</div>
+      <div class="step fade-in">
+        <div class="step-num">3</div>
+        <h3>Download your MoTeC files</h3>
+        <p>One click. Open in i2 Pro and start analyzing. Source files are automatically deleted after download.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section pricing-section" id="pricing">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="eyebrow">Pricing</span>
+      <h2>Plans for every team.</h2>
+      <p class="section-lede">
+        Pricing is not yet final.
+        <a href="#waitlist" class="inline-link">Join the waitlist</a>
+        to lock in early access pricing.
+      </p>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card fade-in">
+        <div class="pricing-header">
+          <h3>Free</h3>
+          <p class="pricing-tagline">Try it out</p>
+        </div>
+        <div class="pricing-price"><span class="price-amount">$0</span></div>
+        <ul class="pricing-features">
+          <li>5 conversions per month</li>
+          <li>Single file at a time</li>
+          <li>Up to 50&nbsp;MB per file</li>
+          <li>Files retained 1&nbsp;hour</li>
+          <li>Auto track detection</li>
+          <li>Full channel mapping</li>
+        </ul>
+        <a href="#waitlist" class="btn btn-ghost btn-block">Join Waitlist</a>
+      </div>
+      <div class="pricing-card pricing-card-featured fade-in">
+        <div class="pricing-badge">Most Popular</div>
+        <div class="pricing-header">
+          <h3>Pro</h3>
+          <p class="pricing-tagline">For working teams</p>
+        </div>
+        <div class="pricing-price"><span class="price-amount">TBD</span><span class="price-period">/month</span></div>
+        <ul class="pricing-features">
+          <li>100 conversions per month</li>
+          <li>Multi-file session merge</li>
+          <li>Up to 500&nbsp;MB per file</li>
+          <li>Files retained 24&nbsp;hours</li>
+          <li>Batch download as zip</li>
+          <li>Organized output folders</li>
+          <li>Email support</li>
+        </ul>
+        <a href="#waitlist" class="btn btn-primary btn-block">Join Waitlist</a>
+      </div>
+      <div class="pricing-card fade-in">
+        <div class="pricing-header">
+          <h3>Team</h3>
+          <p class="pricing-tagline">For multi-car teams</p>
+        </div>
+        <div class="pricing-price"><span class="price-amount">TBD</span><span class="price-period">/month</span></div>
+        <ul class="pricing-features">
+          <li>Unlimited conversions</li>
+          <li>Multi-file session merge</li>
+          <li>Up to 2&nbsp;GB per file</li>
+          <li>Multi-user account</li>
+          <li>API access</li>
+          <li>Custom channel mapping</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="#waitlist" class="btn btn-ghost btn-block">Join Waitlist</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WAITLIST -->
+<section class="section waitlist-section" id="waitlist">
+  <div class="container">
+    <div class="waitlist-card fade-in">
+      <div class="section-header">
+        <span class="eyebrow">Get Early Access</span>
+        <h2>Join the waitlist.</h2>
+        <p class="section-lede">
+          Be first in line when the converter launches. Waitlist members
+          get early access pricing locked in for the life of their
+          subscription.
+        </p>
+      </div>
+      <form class="waitlist-form"
+            action="https://formspree.io/f/xzdakzdw"
+            method="POST">
+        <input type="hidden" name="source" value="converter-landing">
+        <input type="hidden" name="_subject" value="New Converter waitlist signup">
+
+        <div class="form-row">
+          <label>
+            <span class="label-text">Email <em>required</em></span>
+            <input type="email" name="email" required
+                   placeholder="you@team.com" autocomplete="email">
+          </label>
+        </div>
+
+        <div class="form-row">
+          <label>
+            <span class="label-text">Name <em>required</em></span>
+            <input type="text" name="name" required
+                   placeholder="Your name" autocomplete="name">
+          </label>
+        </div>
+
+        <div class="form-row">
+          <label>
+            <span class="label-text">Team or organization</span>
+            <input type="text" name="team" placeholder="Optional"
+                   autocomplete="organization">
+          </label>
+        </div>
+
+        <div class="form-row">
+          <label>
+            <span class="label-text">Series you run <em>required</em></span>
+            <select name="series" required>
+              <option value="">Select one&hellip;</option>
+              <option value="GR Cup">GR Cup</option>
+              <option value="Other GR series">Other Toyota GR series</option>
+              <option value="Other VBOX-based series">Other VBOX-based series</option>
+              <option value="Just curious">Just curious / not racing yet</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="form-row">
+          <label>
+            <span class="label-text">Files per month <em>required</em></span>
+            <select name="volume" required>
+              <option value="">Select one&hellip;</option>
+              <option value="1-10">1&ndash;10</option>
+              <option value="11-50">11&ndash;50</option>
+              <option value="50-200">50&ndash;200</option>
+              <option value="200+">200+</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="form-row">
+          <label>
+            <span class="label-text">What's the most painful part of your current data workflow?</span>
+            <textarea name="pain_point" rows="3"
+                      placeholder="Optional &mdash; helps us prioritize features"></textarea>
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block btn-lg">
+          Reserve My Spot
+        </button>
+
+        <p class="form-note">
+          Your email will only be used for converter updates. No spam,
+          ever. Unsubscribe any time.
+        </p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <a href="https://tedderengineering.com" target="_blank" rel="noopener noreferrer" class="logo-link" aria-label="Tedder Engineering">
+        <img src="tedder-logo.png" alt="Tedder Engineering" class="logo-img" width="952" height="364">
+      </a>
+      <p class="footer-tagline">Motorsports engineering &amp; data analysis tools.</p>
+    </div>
+    <div class="footer-links">
+      <h4>Tools</h4>
+      <a href="https://racetrace.tedderengineering.com">RaceTrace</a>
+      <a href="/">VBOX to MoTeC Converter</a>
+    </div>
+    <div class="footer-links">
+      <h4>Company</h4>
+      <a href="https://tedderengineering.com">Home</a>
+      <a href="https://tedderengineering.com#contact">Contact</a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <p>&copy; 2026 Tedder Engineering. All rights reserved.</p>
+    <p class="disclaimer">VBOX is a trademark of Racelogic Ltd. MoTeC and i2&nbsp;Pro are trademarks of MoTeC Pty Ltd. This product is not affiliated with or endorsed by either company.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

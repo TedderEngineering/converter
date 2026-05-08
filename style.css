@@ -1,0 +1,1109 @@
+/* ==========================================================================
+   VBOX to MoTeC Converter — Landing page styles
+   Matches the Tedder Engineering master site (Inter + Barlow Condensed,
+   near-black background, .btn/.card/.section component patterns) but uses
+   a green sub-brand accent following the RaceTrace pattern of distinct
+   per-product palettes.
+   ========================================================================== */
+
+:root {
+  /* Tedder Engineering master palette */
+  --bg:           #0a0a0a;
+  --bg-elevated:  #141414;
+  --bg-card:      #1a1a1a;
+  --bg-card-hover:#1f1f1f;
+  --border:       #2a2a2a;
+  --border-strong:#3a3a3a;
+
+  --text:         #f5f5f5;
+  --text-muted:   #a8a8a8;
+  --text-dim:     #6b6b6b;
+
+  /* Sub-brand: emerald to cyan */
+  --accent:       #10b981;
+  --accent-2:     #22d3ee;
+  --accent-strong:#14d39e;
+  --accent-dim:   rgba(16, 185, 129, 0.12);
+
+  /* Master orange — kept for cross-links to main site if needed */
+  --te-orange:    #e8750a;
+  --te-gold:      #d4a017;
+
+  --gradient:     linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+
+  /* Typography */
+  --font-body:    'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Barlow Condensed', 'Inter', system-ui, sans-serif;
+
+  /* Spacing scale */
+  --container-max: 1200px;
+  --container-pad: 24px;
+  --section-y:     96px;
+
+  --radius-sm:  4px;
+  --radius-md:  8px;
+  --radius-lg:  12px;
+  --radius-xl:  20px;
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--accent-strong); }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  margin: 0 0 0.5em;
+}
+
+h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+h2 { font-size: clamp(1.875rem, 3.2vw, 2.5rem); }
+h3 { font-size: 1.25rem; }
+h4 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.06em; }
+
+p { margin: 0 0 1em; }
+
+code {
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  background: var(--bg-elevated);
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  font-size: 0.9em;
+  color: var(--accent-2);
+  border: 1px solid var(--border);
+}
+
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-pad);
+}
+
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+/* Hero pill eyebrow — mirrors RaceTrace HomePage.tsx:61-66 structure
+   (rounded-full pill + status dot + label) with sub-brand emerald
+   substituted for RaceTrace's brand blue + green dot. Used in the
+   hero only; .eyebrow above remains the section-header convention. */
+.eyebrow-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  margin-bottom: 24px;
+  background: var(--accent-dim);
+  border: 1px solid rgba(16, 185, 129, 0.22);
+  border-radius: 999px;
+}
+
+.eyebrow-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  animation: pill-pulse 2s ease-in-out infinite;
+}
+
+@keyframes pill-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.4; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eyebrow-dot { animation: none; }
+}
+
+.eyebrow-text {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.gradient-text {
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.section {
+  padding: var(--section-y) 0;
+  border-top: 1px solid var(--border);
+}
+
+.section-header {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 64px;
+}
+
+.section-lede {
+  color: var(--text-muted);
+  font-size: 1.125rem;
+  margin-top: 16px;
+}
+
+.inline-link {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: var(--radius-md);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn:hover { transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+
+.btn-primary {
+  background: var(--gradient);
+  color: #062019;
+  box-shadow: 0 4px 24px rgba(16, 185, 129, 0.25);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 8px 32px rgba(16, 185, 129, 0.4);
+  color: #062019;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--border-strong);
+}
+
+.btn-ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-dim);
+}
+
+.btn-sm { padding: 9px 18px; font-size: 0.85rem; }
+.btn-lg { padding: 18px 36px; font-size: 1.125rem; }
+.btn-block { width: 100%; }
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: saturate(140%) blur(12px);
+  -webkit-backdrop-filter: saturate(140%) blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.logo-mark {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: var(--gradient);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.logo-mark::after {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  background: var(--bg);
+  border-radius: 3px;
+}
+
+.logo-text {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.15rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.logo-accent {
+  color: var(--accent);
+  margin-left: 4px;
+}
+
+/* Tedder Engineering logo lockup — header pattern mirrors RaceTrace
+   Layout.tsx:188-196 (image + wordmark, two separate anchors).
+   Footer pattern mirrors Layout.tsx:253-257 with the logo at h-6.
+   The legacy .logo / .logo-mark / .logo-text / .logo-accent rules
+   above remain defined for safety; HTML no longer consumes them. */
+.logo-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo-img {
+  height: 32px;
+  width: auto;
+  display: block;
+}
+
+.site-footer .logo-img { height: 24px; }
+
+.logo-wordmark {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.15rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.logo-wordmark:hover { color: var(--accent); }
+
+@media (max-width: 640px) {
+  .logo-wordmark { display: none; }
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.site-nav a {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.site-nav a:hover { color: var(--text); }
+.site-nav a.btn { color: #062019; }
+.site-nav a.btn:hover { color: #062019; }
+
+/* Mobile nav toggle (hamburger) — mirrors the master site pattern at
+   tedderengineering-site/assets/css/style.css:124-152, adapted to the
+   converter's flat naming convention. */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--text);
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.nav-toggle.is-open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle.is-open span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle.is-open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+@media (max-width: 768px) {
+  .nav-toggle { display: flex; }
+
+  .site-nav {
+    position: fixed;
+    top: 72px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(10, 10, 10, 0.98);
+    flex-direction: column;
+    justify-content: center;
+    gap: 24px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+
+  .site-nav.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .site-nav a { font-size: 20px; }
+  .site-nav a.btn-sm { font-size: 0.85rem; }
+}
+
+/* ==========================================================================
+   Hero
+   ========================================================================== */
+
+.hero {
+  position: relative;
+  padding: 80px 0 96px;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 600px 400px at 75% 20%, rgba(34, 211, 238, 0.10), transparent 60%),
+    radial-gradient(ellipse 500px 350px at 20% 80%, rgba(16, 185, 129, 0.08), transparent 60%);
+  pointer-events: none;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 64px;
+  align-items: center;
+  position: relative;
+}
+
+@media (max-width: 960px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+}
+
+.hero-text h1 {
+  margin-top: 0;
+  margin-bottom: 24px;
+}
+
+.lede {
+  font-size: 1.25rem;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.sublede {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+}
+
+.hero-ctas {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.hero-note {
+  color: var(--text-dim);
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.hero-visual {
+  position: relative;
+}
+
+/* Hero halo — mirrors RaceTrace HomePage.tsx:102 (-inset-4 + blur-2xl).
+   Sits behind the screenshot-frame; emerald + cyan low-opacity gradient
+   blurred to a soft glow. Pointer-events:none so it never intercepts
+   clicks on the visual. */
+.hero-halo {
+  position: absolute;
+  inset: -16px;
+  border-radius: var(--radius-xl);
+  background: linear-gradient(
+    to right,
+    rgba(16, 185, 129, 0.12) 0%,
+    transparent 50%,
+    rgba(34, 211, 238, 0.12) 100%
+  );
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-visual .screenshot-frame {
+  z-index: 1;
+}
+
+.screenshot-frame {
+  position: relative;
+  border-radius: var(--radius-lg);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  box-shadow:
+    0 24px 64px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(16, 185, 129, 0.05) inset;
+}
+
+/* Browser-window chrome strip — mirrors RaceTrace HomePage.tsx:104-110
+   structure (3 dots flexbox row), but per the brief uses macOS
+   traffic-light hues (universal chrome) rather than tinted brand reds/
+   yellows/greens. Title strip intentionally empty: the placeholder
+   beneath already labels itself. */
+.screenshot-chrome {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 14px;
+  background: rgba(10, 10, 10, 0.95);
+  border-bottom: 1px solid rgba(16, 185, 129, 0.12);
+  z-index: 3;
+}
+
+.chrome-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.chrome-dot-close { background: #ff5f57; }
+.chrome-dot-min   { background: #febc2e; }
+.chrome-dot-max   { background: #28c840; }
+
+/* <picture> wraps the <img>; display:contents removes its box so the
+   <img>'s width/height:100% still resolve against the parent frame
+   (.screenshot-frame for hero, .showcase-frame for showcase figures). */
+.screenshot-frame picture,
+.showcase-frame picture { display: contents; }
+
+.screenshot {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  position: relative;
+  z-index: 2;
+}
+
+/* When no real screenshot is loaded, the placeholder underneath shows
+   through. Once the user drops in hero-screenshot.png, it covers this. */
+.screenshot-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--text-dim);
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 0.9rem;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      var(--bg-elevated),
+      var(--bg-elevated) 10px,
+      var(--bg-card) 10px,
+      var(--bg-card) 20px
+    );
+  z-index: 1;
+}
+
+.screenshot-placeholder small {
+  color: var(--text-dim);
+  font-size: 0.75rem;
+}
+
+/* If the screenshot fails to load (broken image), the placeholder shows */
+.screenshot[src=""], .screenshot:not([src]) { display: none; }
+
+/* ==========================================================================
+   Problem section
+   ========================================================================== */
+
+.problem-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.problem-card {
+  padding: 28px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+
+.problem-icon {
+  font-size: 1.75rem;
+  color: #f59e0b;
+  margin-bottom: 12px;
+  line-height: 1;
+}
+
+.problem-card h3 {
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.problem-card p {
+  color: var(--text-muted);
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   Features
+   ========================================================================== */
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  padding: 32px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+}
+
+.card:hover {
+  border-color: var(--border-strong);
+  background: var(--bg-card-hover);
+  transform: translateY(-2px);
+}
+
+.feature-card { position: relative; }
+
+.feature-number {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.12em;
+  margin-bottom: 12px;
+}
+
+.feature-card h3 {
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.feature-card p {
+  color: var(--text-muted);
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   Showcase ("See it in action")
+   ========================================================================== */
+
+.showcase-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+.showcase-figure {
+  margin: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 40px;
+  align-items: center;
+}
+
+/* Alternate orientation on every other figure for visual rhythm */
+.showcase-figure:nth-child(even) {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+}
+
+.showcase-figure:nth-child(even) .showcase-frame {
+  order: 2;
+}
+
+@media (max-width: 880px) {
+  .showcase-figure,
+  .showcase-figure:nth-child(even) {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .showcase-figure:nth-child(even) .showcase-frame { order: 0; }
+}
+
+.showcase-frame {
+  position: relative;
+  border-radius: var(--radius-lg);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  box-shadow:
+    0 16px 48px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(16, 185, 129, 0.05) inset;
+}
+
+.showcase-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  position: relative;
+  z-index: 2;
+}
+
+.showcase-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--text-dim);
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 0.9rem;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      var(--bg-elevated),
+      var(--bg-elevated) 10px,
+      var(--bg-card) 10px,
+      var(--bg-card) 20px
+    );
+  z-index: 1;
+}
+
+.showcase-placeholder small {
+  color: var(--text-dim);
+  font-size: 0.75rem;
+  text-align: center;
+  padding: 0 16px;
+}
+
+.showcase-figure figcaption {
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.showcase-figure figcaption strong {
+  display: block;
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+
+/* ==========================================================================
+   Steps
+   ========================================================================== */
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr;
+  gap: 16px;
+  align-items: stretch;
+}
+
+@media (max-width: 880px) {
+  .steps-grid { grid-template-columns: 1fr; }
+  .step-arrow { display: none; }
+}
+
+.step {
+  padding: 32px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  text-align: center;
+}
+
+.step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--gradient);
+  color: #062019;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.25rem;
+  margin-bottom: 16px;
+}
+
+.step h3 {
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.step p {
+  color: var(--text-muted);
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.step-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   Pricing
+   ========================================================================== */
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  align-items: stretch;
+}
+
+.pricing-card {
+  padding: 36px 28px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.pricing-card-featured {
+  border-color: var(--accent);
+  background: linear-gradient(180deg, var(--accent-dim) 0%, var(--bg-card) 60%);
+}
+
+.pricing-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--gradient);
+  color: #062019;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 999px;
+}
+
+.pricing-header h3 {
+  font-size: 1.5rem;
+  margin: 0 0 4px;
+}
+
+.pricing-tagline {
+  color: var(--text-muted);
+  margin: 0 0 24px;
+  font-size: 0.95rem;
+}
+
+.pricing-price {
+  margin-bottom: 24px;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.price-amount {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 800;
+}
+
+.price-period {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.pricing-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px;
+  flex: 1;
+}
+
+.pricing-features li {
+  position: relative;
+  padding: 10px 0 10px 26px;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.pricing-features li:last-child { border-bottom: none; }
+
+.pricing-features li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   Waitlist form
+   ========================================================================== */
+
+.waitlist-section {
+  background:
+    radial-gradient(ellipse 800px 500px at 50% 0%, rgba(16, 185, 129, 0.08), transparent 70%);
+}
+
+.waitlist-card {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 56px 48px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-xl);
+}
+
+@media (max-width: 640px) {
+  .waitlist-card { padding: 40px 24px; }
+}
+
+.waitlist-card .section-header {
+  margin-bottom: 32px;
+}
+
+.waitlist-form { display: grid; gap: 16px; }
+
+.form-row { display: block; }
+
+.label-text {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+
+.label-text em {
+  font-style: normal;
+  color: var(--text-dim);
+  font-weight: 400;
+  margin-left: 6px;
+  font-size: 0.78rem;
+}
+
+.waitlist-form input,
+.waitlist-form select,
+.waitlist-form textarea {
+  width: 100%;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.waitlist-form input:focus,
+.waitlist-form select:focus,
+.waitlist-form textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-dim);
+}
+
+.waitlist-form textarea { resize: vertical; min-height: 90px; }
+
+.waitlist-form select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path fill='%2310b981' d='M6 8L0 0h12z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 40px;
+}
+
+.form-note {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  text-align: center;
+  margin: 4px 0 0;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  background: var(--bg-elevated);
+  padding-top: 64px;
+  margin-top: 64px;
+}
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 48px;
+}
+
+@media (max-width: 720px) {
+  .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+}
+
+.footer-tagline {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin: 12px 0 0;
+}
+
+.footer-links { display: flex; flex-direction: column; gap: 8px; }
+
+.footer-links h4 {
+  color: var(--text-dim);
+  margin: 0 0 8px;
+}
+
+.footer-links a {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  text-decoration: none;
+}
+
+.footer-links a:hover { color: var(--text); }
+
+.footer-bottom {
+  padding: 24px 0;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  flex-wrap: wrap;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
+
+.footer-bottom p { margin: 0; }
+
+.disclaimer {
+  max-width: 540px;
+  font-size: 0.78rem;
+  text-align: right;
+}
+
+@media (max-width: 720px) {
+  .disclaimer { text-align: left; }
+}
+
+/* ==========================================================================
+   Fade-in observer
+   ========================================================================== */
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-in { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+}
